@@ -40,7 +40,7 @@ export default function TopicsList({
 }) {
     const slugs: { [key: number]: string } = {}
     topics.forEach(topic => {
-        slugs[topic.id] = slugify(topic.title, { lower: true })
+        slugs[topic.id] = slugify(topic.title + topic.id, { lower: true })
     })
     return (
         <div>
