@@ -94,7 +94,7 @@ export default function SecondarySectionPage({
                             Weekly {sectionType === "recitation" ? "Recitation" : "Lab"} Schedule
                         </h4>
                         {topics.length > 0 ? (
-                            <TopicsList topics={topics} />
+                            <TopicsList permalinks topics={topics} />
                         ) : (
                             <div role="alert" className="alert my-4">
                                 <span className="text-2xl"><MdErrorOutline /></span>
