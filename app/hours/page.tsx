@@ -15,6 +15,7 @@ export default function HoursPage() {
             .from("hours")
             .select("id,day,start,end,location,videoConferenceLink:videoconference_link,extraInfo:extra_info")
             .match({ person_id: ROBS_PERSON_ID, type: "office" })
+            .order("id", { ascending: true })
     )
 
     return (
