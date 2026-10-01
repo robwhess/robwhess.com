@@ -20,6 +20,7 @@ export default function TAsPage({
             .from("person")
             .select("*,hours!inner(*,videoConferenceLink:videoconference_link,extraInfo:extra_info)")
             .eq("hours.course_term_id", courseTermId)
+            .order("id", { referencedTable: "hours", ascending: true })
     )
 
     return (
