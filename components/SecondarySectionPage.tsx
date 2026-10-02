@@ -28,6 +28,7 @@ export default function SecondarySectionPage({
             .eq("course_term_id", courseTermId)
             .eq("type", sectionType)
             .order("section", { ascending: true })
+            .order("weeks", { referencedTable: "topic", ascending: false })
     )
 
     const topics = data?.flatMap(section => section.topic)
