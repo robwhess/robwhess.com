@@ -28,11 +28,14 @@ export default function SecondarySectionPage({
             .eq("course_term_id", courseTermId)
             .eq("type", sectionType)
             .order("section", { ascending: true })
-            .order("weeks", { referencedTable: "topic", ascending: false })
     )
 
+    /*
+     * Pull topics out of all sections (in case topics are attached to
+     * different sections in the DB), and sort by descending week.
+     */
     const topics = data?.flatMap(section => section.topic)
-        .sort((a, b) => (a.weeks[0] ?? 0) - (b.weeks[0] ?? 0)) || []
+        .sort((a, b) => (b.weeks[0] ?? 0) - (a.weeks[0] ?? 0)) || []
 
     return (
         <div className="flex flex-col">
