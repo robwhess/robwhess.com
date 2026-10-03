@@ -27,7 +27,7 @@ export default function AssignmentCard({
                 {due && (
                     <div className="flex items-center gap-2 font-medium text-sm">
                         <FaCalendarDay />
-                        <span>{dayjs(due).format("ddd, M/D/YYYY, h:mm a")}</span>
+                        <span>{dayjs(due).format("dddd, M/D/YYYY, h:mm a")}</span>
                     </div>
                 )}
                 {notes.length > 0 && (
