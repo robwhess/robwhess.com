@@ -1,10 +1,10 @@
-import { FaGithub } from "react-icons/fa6"
+import { FaGithub, FaHandFist } from "react-icons/fa6"
 import { MdOutlineAlternateEmail, MdCode } from "react-icons/md"
 
 export default function Footer() {
     return (
         <footer className="bg-neutral text-neutral-content text-sm">
-            <div className="max-w-7xl mx-auto p-6 flex flex-col gap-6 md:gap-0 md:flex-row md:justify-between md:items-start">
+            <div className="max-w-7xl mx-auto p-6 flex flex-col gap-6 md:gap-0 md:flex-row md:justify-between md:items-stretch">
                 <div>
                     <p>© Rob Hess</p>
                     <p>
@@ -15,8 +15,9 @@ export default function Footer() {
                     <p>Corvallis, OR 97331</p>
 
                 </div>
-                <div>
+                <div className="flex flex-col gap-6 justify-between md:items-center text-xs">
                     <p className="text-xs">For information about courses taught before spring of 2026, please see <a className="link" href="https://legacy.robwhess.com/teaching">Rob&apos;s legacy website.</a></p>
+                    <p>This site was built by a human. <FaHandFist className="inline-block" /></p>
                 </div>
                 <div className="flex gap-4 text-xl">
                     <a href="https://github.com/robwhess" target="_blank" rel="noopener noreferrer" title="Link to Rob's GitHub profile"><FaGithub /></a>
