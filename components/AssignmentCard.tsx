@@ -19,7 +19,11 @@ export default function AssignmentCard({
         <div className="card h-full bg-base-100 border border-base-300">
             <div className="card-body">
                 <div>
-                    <a href={url} className="link">
+                    <a
+                        href={url}
+                        className="link"
+                        target="_blank" rel="noopener noreferrer"
+                    >
                         <h5 className="text-lg font-semibold">{title}</h5>
                     </a>
                 </div>
@@ -40,7 +44,13 @@ export default function AssignmentCard({
                     </ul>
                 )}
                 <div className="card-actions justify-end mt-auto pt-4">
-                    <a href={url} className="btn btn-primary">Go to assignment</a>
+                    <a
+                        href={url}
+                        className="btn btn-primary"
+                        target="_blank" rel="noopener noreferrer"
+                    >
+                        Go to assignment
+                    </a>
                 </div>
             </div>
         </div>
