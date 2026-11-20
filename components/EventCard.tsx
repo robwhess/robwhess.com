@@ -5,6 +5,7 @@
  * "June 10, 2026".
  */
 
+import { type ReactNode } from "react"
 import dayjs from "dayjs"
 import CustomParseFormat from "dayjs/plugin/customParseFormat"
 import { MdAccessTime, MdOutlineInfo, MdOutlineLocationOn, MdVideocam } from "react-icons/md"
@@ -19,11 +20,9 @@ export default function EventCard({
   videoConferenceLink,
   extraInfo,
   locationLink,
-  heading,
-  small,
-  tight,
-  border,
-  shadow = true
+  headingContent,
+  footerContent,
+  small
 } : {
     day: string,
     start: string,
@@ -32,38 +31,39 @@ export default function EventCard({
     videoConferenceLink?: string | null,
     extraInfo?: string | null,
     locationLink?: string | null,
-    heading?: string | null,
-    small?: boolean,
-    tight?: boolean,
-    border?: boolean,
-    shadow?: boolean
+    headingContent?: ReactNode | null,
+    footerContent?: ReactNode | null,
+    small?: boolean
 }) {
     const startTime = dayjs(start, "HH:mm:ss").format("h:mm a")
     const endTime = end && dayjs(end, "HH:mm:ss").format("h:mm a")
 
     return (
         <div className={`
-            card bg-base-100
-            ${small ? "card-sm" : ""}
-            ${border ? "border border-base-300" : ""}
-            ${shadow && !border ? "shadow-sm" : ""}
+            flex gap-4 bg-base-100 rounded-sm border border-base-300
+            ${small ? "p-4" : "p-6"}
         `}>
-            <div className={`
-                card-body gap-1
-                ${tight ? "p-4" : ""}
-                ${!shadow && !border ? "p-0" : ""}
-            `}>
-                {heading && (
-                    <p className="uppercase font-semibold text-gray-500">{heading}</p>
-                )}
-                <h3 className="card-title">{day}</h3>
-                <div className="flex items-center gap-2">
+            {headingContent && <div>{headingContent}</div>}
+            <div className="flex flex-col gap-1">
+                <h3 className={`
+                    font-semibold
+                    ${small ? "text-base" : "text-lg"}
+                `}>
+                    {day}
+                </h3>
+                <div className={`
+                    flex items-center gap-2
+                    ${small ? "text-xs" : "text-sm"}
+                `}>
                     <p className="grow-0"><MdAccessTime /></p>
                     <p>{startTime}{endTime && <> &ndash; {endTime}</>}</p>
                 </div>
                 <div className="flex items-center gap-4">
                     {location && (
-                        <div className="flex items-center gap-2">
+                        <div className={`
+                            flex items-center gap-2
+                            ${small ? "text-xs" : "text-sm"}
+                        `}>
                             <p className="grow-0"><MdOutlineLocationOn /></p>
                             <p>{locationLink ? (
                                 <a
@@ -92,6 +92,7 @@ export default function EventCard({
                         <p>{extraInfo}</p>
                     </div>
                 )}
+                {footerContent && <div>{footerContent}</div>}
             </div>
         </div>
     )
@@ -99,27 +100,23 @@ export default function EventCard({
 
 export function EventCardSkeleton({
     small,
-    tight,
-    border,
-    shadow = true
+    heading
 }: {
     small?: boolean,
-    tight?: boolean,
-    border?: boolean,
-    shadow?: boolean
+    heading?: boolean
 }) {
     return (
         <div className={`
-            card min-w-48 bg-base-100
-            ${small ? "card-sm" : ""}
-            ${border ? " border border-base-300" : ""}
-            ${shadow && !border ? "shadow-sm" : ""}
+            flex gap-2 bg-base-100 rounded-sm border border-base-300
+            ${heading ? "min-w-64" : "min-w-48"}
+            ${small ? "p-4" : "p-6"}
         `}>
-            <div className={`
-                card-body gap-2
-                ${tight ? "p-4" : ""}
-                ${!shadow && !border ? "p-0" : ""}
-            `}>
+            {heading && (
+                <div className="flex-3">
+                    <div className="skeleton h-3 w-3/4"></div>
+                </div>
+            )}
+            <div className="flex-5 flex flex-col gap-2">
                 <div className={`skeleton w-3/4 ${small ? "h-4" : "h-6"}`}></div>
                 <div className={`skeleton w-1/2 ${small ? "h-2" : "h-4"}`}></div>
                 <div className={`skeleton w-2/3 ${small ? "h-2" : "h-4"}`}></div>

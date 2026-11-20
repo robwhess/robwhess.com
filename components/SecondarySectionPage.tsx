@@ -56,39 +56,32 @@ export default function SecondarySectionPage({
             )}
             <div className="flex flex-col">
                 <ul className="flex flex-wrap gap-4 my-6">
-                    {isLoading && (
-                        <li className="flex gap-4 py-4 px-6 border border-base-300 rounded-sm">
-                            <div className="flex flex-col gap-1">
-                                <div className="skeleton h-2 w-16"></div>
-                                <div className="skeleton h-2 w-12"></div>
-                            </div>
-                            <div>
-                                <EventCardSkeleton shadow={false} />
-                            </div>
-                        </li>
-                    )}
+                    {isLoading && <li><EventCardSkeleton heading /></li>}
                     {data && data.map(section => (
-                        <li
-                            key={section.id}
-                            className="flex gap-4 py-4 px-6 border border-base-300 rounded-sm"
-                        >
-                            <div className="flex flex-col gap-1">
-                                <p className="font-semibold text-sm">Section {section.section}</p>
-                                <p className="text-xs text-gray-400">CRN {section.crn}</p>
-                            </div>
-                            <div>
-                                <EventCard shadow={false} {...section} />
-                                <h5 className="mt-6 text-sm font-semibold">Section leaders</h5>
-                                {section.leader.length > 0 ? (
-                                    <ul className="list-outside list-disc pl-6">
-                                        {section.leader.map(leader => (
-                                            <li className="list-item text-sm" key={leader.id}>{leader.name}</li>
-                                        ))}
-                                    </ul>
-                                ) : (
-                                    <p className="ml-2 text-sm text-gray-400">TBD</p>
+                        <li key={section.id}>
+                            <EventCard
+                                headingContent={(
+                                    <div className="flex flex-col gap-1">
+                                        <p className="font-semibold text-sm">Section {section.section}</p>
+                                        <p className="text-xs text-gray-400">CRN {section.crn}</p>
+                                    </div>
                                 )}
-                            </div>
+                                footerContent={(
+                                    <>
+                                        <h5 className="mt-6 text-sm font-semibold">Section leaders</h5>
+                                        {section.leader.length > 0 ? (
+                                            <ul className="list-outside list-disc pl-6">
+                                                {section.leader.map(leader => (
+                                                    <li className="list-item text-sm" key={leader.id}>{leader.name}</li>
+                                                ))}
+                                            </ul>
+                                        ) : (
+                                            <p className="ml-2 text-sm text-gray-400">TBD</p>
+                                        )}
+                                    </>
+                                )}
+                                {...section}
+                            />
                         </li>
                     ))}
                 </ul>

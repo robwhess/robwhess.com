@@ -64,14 +64,18 @@ export default function CourseTermPage({
 
                     <h4 className="mt-4 mb-1 text-lg font-medium uppercase text-gray-700">Lectures</h4>
                     <div className="mx-1 flex flex-col md:flex-row gap-2">
-                        {isLoading && <EventCardSkeleton tight border />}
+                        {isLoading && <EventCardSkeleton heading />}
                         {data?.section?.length ? (
                             data?.section?.map(lecture => (
                                 <EventCard
                                     key={lecture.id}
-                                    tight border
                                     {...lecture}
-                                    heading={`Section ${lecture.section} - CRN ${lecture.crn}`}
+                                    headingContent={(
+                                        <div className="flex flex-col gap-1">
+                                            <p className="font-semibold text-sm">Section {lecture.section}</p>
+                                            <p className="text-xs text-gray-400">CRN {lecture.crn}</p>
+                                        </div>
+                                    )}
                                 />
                         ))) : (
                             data && <p className="ml-1 text-sm text-gray-400">No lecture information available</p>

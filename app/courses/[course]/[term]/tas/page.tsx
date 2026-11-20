@@ -60,7 +60,7 @@ export default function TAsPage({
                                 <div className="flex flex-wrap gap-2">
                                     {person.hours.filter(hours => hours.type === type).map(hours => (
                                         <div key={hours.id}>
-                                            <EventCard tight small {...hours} />
+                                            <EventCard small {...hours} />
                                         </div>
                                     ))}
                                 </div>
