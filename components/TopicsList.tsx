@@ -4,6 +4,7 @@
 
 import Link from "next/link"
 import slugify from "slugify"
+import Sqids from "sqids"
 import { FaLink } from "react-icons/fa6"
 
 import { Link as LinkType, Topic } from "@/lib/types"
@@ -38,9 +39,10 @@ export default function TopicsList({
     topics: Topic[],
     permalinks?: boolean
 }) {
+    const sqids = new Sqids({ minLength: 6 })
     const slugs: { [key: number]: string } = {}
     topics.forEach(topic => {
-        slugs[topic.id] = slugify(`${topic.title}-${topic.id}`, { lower: true })
+        slugs[topic.id] = slugify(`${topic.title}-${sqids.encode([topic.id])}`, { lower: true })
     })
     return (
         <div>
